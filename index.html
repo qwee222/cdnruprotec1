@@ -1,337 +1,157 @@
+
 <!DOCTYPE html>
-<html lang="es">
+<html lang="cs">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VIDEO GRANJA CENTRADO</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/128/483/483408.png">
+<script id="_wau1zx">var _wau = _wau || []; _wau.push(["small", "pastel77", "1zx"]);</script><script async src="//waust.at/s.js"></script>
+<meta content="https://i.postimg.cc/rw2CNdZd/Captura-de-pantalla-2025-12-30-210309.png"" property="og:image">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>D&#105;sk&#114;&#101;tn&#237; f&#111;t&#107;y</title>
+<meta property="og:title" content="D&#105;sk&#114;&#101;tn&#237; f&#111;t&#107;y" />
 <style>
 
-        :root {
+@import url("https://fonts.googleapis.com/css?family=Montserrat&subset=latin-ext");
 
-            --sky-day: #87CEEB;
+*{margin:0;padding:0;box-sizing:border-box}
 
-            --sky-night: #1a1a2e;
+html{font-size:62.5%}
 
-            --grass: #4d8f1e;
+body,html{width:100%;height:100%;overflow:hidden}
 
-        }
+body{font-family:Montserrat,Arial,sans-serif;background:#000}
 
-        /* Reset y base */
+.main{position:relative;width:100%;height:100%;z-index:1}
 
-        body, html {
+.videobgbox{position:fixed;inset:0;z-index:0}
 
-            margin: 0;
+.videobgbox:after{content:"";position:absolute;inset:0;background:rgba(0,0,0,0.5);background-image:linear-gradient(rgba(255,255,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.05) 1px,transparent 1px);background-size:3px 3px;z-index:1}
 
-            padding: 0;
+video{width:100%;height:100%;object-fit:cover;filter:blur(8px)}
 
-            width: 100%;
+.stepbox{position:relative;z-index:10;height:100%;display:flex;align-items:center;justify-content:center}
 
-            height: 100%;
+.step{max-width:450px;width:90%;padding:3rem;color:#fff;text-align:center;display:none;background:rgba(0,0,0,0.2);border-radius:15px}
 
-            overflow: hidden;
+.step:first-child{display:block}
 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+h1{font-size:3.5rem;margin-bottom:2rem;color:#ffff00;text-transform:uppercase;text-shadow:2px 2px 4px rgba(0,0,0,0.8)}
 
-            background-color: var(--sky-day);
+.texto-encuesta{font-size:1.8rem;line-height:1.4;margin-bottom:2.5rem;display:block;text-shadow:1px 1px 2px #000}
 
-        }
+.btnbox{display:flex;gap:15px;justify-content:center}
 
-        /* Fondo Animado */
+.btn{padding:1.5rem 3rem;font-size:1.6rem;text-transform:uppercase;font-weight:bold;text-decoration:none;border-radius:50px;transition:0.3s;cursor:pointer;border:none;min-width:140px;display:inline-block}
 
-        .farm-background {
+.btn--primary{background:linear-gradient(270deg,#ff0000,#c154c1);color:#fff;box-shadow:0 4px 15px rgba(226,16,16,0.4)}
 
-            position: fixed;
+.btn--accent{background:#555;color:#fff}
 
-            top: 0;
+.progress{position:fixed;bottom:6rem;left:50%;transform:translateX(-50%);width:200px;height:6px;background:rgba(255,255,255,0.2);border-radius:10px;overflow:hidden;z-index:15}
 
-            left: 0;
+.bar{width:33%;height:100%;background:linear-gradient(90deg,#1ee8cc,#19a3e0);transition:0.5s}
 
-            width: 100%;
+.footer-legal{position:fixed;bottom:1rem;width:100%;text-align:center;font-size:1.1rem;color:rgba(255,255,255,0.5);z-index:20}
 
-            height: 100%;
+.footer-legal a{color:rgba(255,255,255,0.6);text-decoration:none;margin:0 8px;font-weight:bold}
 
-            animation: skyCycle 15s linear infinite;
+.modal-legal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:1000;padding:20px;color:#ccc;overflow-y:auto}
 
-            z-index: 1;
+.modal-content{max-width:600px;margin:40px auto;font-size:1.4rem;line-height:1.6;text-align:left;background:#111;padding:30px;border-radius:10px;border:1px solid #333}
 
-        }
-
-        @keyframes skyCycle {
-
-            0%, 100% { background-color: var(--sky-day); }
-
-            50% { background-color: var(--sky-night); }
-
-        }
-
-        .landscape {
-
-            position: absolute;
-
-            bottom: 0;
-
-            width: 100%;
-
-            height: 25%;
-
-            background: var(--grass);
-
-            border-top: 8px solid #3d7a16;
-
-            z-index: 2;
-
-        }
-
-        /* Sol y Luna */
-
-        .sun-moon {
-
-            position: absolute;
-
-            width: 50px;
-
-            height: 50px;
-
-            border-radius: 50%;
-
-            top: 10%;
-
-            left: 50%;
-
-            z-index: 1;
-
-            animation: sunMoonOrbit 15s linear infinite;
-
-        }
-
-        @keyframes sunMoonOrbit {
-
-            0%, 100% { background: #ffd700; transform: translateX(-120px); box-shadow: 0 0 30px #ffd700; }
-
-            50% { background: #f0f0f0; transform: translateX(120px); box-shadow: 0 0 30px #fff; }
-
-        }
-
-        /* CONTENEDOR CENTRADO */
-
-        .main-wrapper {
-
-            position: absolute;
-
-            top: 50%;
-
-            left: 50%;
-
-            transform: translate(-50%, -50%);
-
-            width: 90%;
-
-            max-width: 380px;
-
-            z-index: 100; /* Asegura que esté por encima de todo */
-
-            text-align: center;
-
-        }
-
-        .card {
-
-            background: rgba(255, 255, 255, 0.1);
-
-            backdrop-filter: blur(12px);
-
-            -webkit-backdrop-filter: blur(12px);
-
-            padding: 25px;
-
-            border-radius: 25px;
-
-            border: 1px solid rgba(255, 255, 255, 0.3);
-
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-
-        }
-
-        h1 {
-
-            color: #fff;
-
-            font-size: 1.4rem;
-
-            margin-bottom: 20px;
-
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-
-            margin-top: 0;
-
-        }
-
-        /* Estilo del Video/GIF */
-
-        .video-box {
-
-            position: relative;
-
-            width: 100%;
-
-            border-radius: 15px;
-
-            overflow: hidden;
-
-            cursor: pointer;
-
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-
-            background: #000;
-
-            line-height: 0; /* Elimina espacio extra debajo de la imagen */
-
-        }
-
-        .video-box img {
-
-            width: 100%;
-
-            height: auto;
-
-            display: block;
-
-        }
-
-        .play-overlay {
-
-            position: absolute;
-
-            top: 50%;
-
-            left: 50%;
-
-            transform: translate(-50%, -50%);
-
-            background: rgba(29, 161, 242, 0.85);
-
-            width: 65px;
-
-            height: 65px;
-
-            border-radius: 50%;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            border: 3px solid white;
-
-        }
-
-        .play-overlay::after {
-
-            content: '';
-
-            border-style: solid;
-
-            border-width: 12px 0 12px 20px;
-
-            border-color: transparent transparent transparent white;
-
-            margin-left: 5px;
-
-        }
-
-        .btn-action {
-
-            display: inline-block;
-
-            margin-top: 25px;
-
-            padding: 15px 40px;
-
-            background: #ffce00;
-
-            color: #000;
-
-            text-decoration: none;
-
-            border-radius: 50px;
-
-            font-weight: 800;
-
-            font-size: 1rem;
-
-            transition: transform 0.2s;
-
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-
-        }
-
-        .btn-action:active {
-
-            transform: scale(0.95);
-
-        }
+.close-modal{float:right;font-size:30px;cursor:pointer;color:#fff;line-height:20px}
 </style>
 </head>
 <body>
-<div class="farm-background">
-<div class="sun-moon"></div>
-<div class="landscape"></div>
+<div class="main">
+<div class="videobgbox">
+<video autoplay muted loop playsinline>
+<source src="https://cdn-dimi.akamaized.net/landings/288193/1714145726/images/video-5.mp4" type="video/mp4">
+</video>
 </div>
-<div class="main-wrapper">
-<div class="card">
-<h1>REPRODUCTOR DE VIDEO</h1>
-<div class="video-box" onclick="startRedirect()">
-<img id="videoGif" src="https://i.imgur.com/QHVYxOl.gif" alt="Cargando video...">
-<div class="play-overlay"></div>
+<div class="stepbox">
+<div class="step" id="s1">
+<h1>P&#111;z&#111;r!</h1>
+<span class="texto-encuesta">Jsme sk&#117;p&#105;n&#101; m&#97;m&#105;n&#101;k s&#111;l&#111; v&#101; v&#283;k&#117; 30 a&#382; 50 l&#101;t, kt&#101;r&#233; hl&#101;d&#97;j&#237; v&#122;t&#97;hy. J&#111;st&#101;-l&#105; pl&#110;&#111;l&#101;t&#105;, kl&#105;kn&#283;t&#101; n&#97; VS&#84;&#85;P&#73;T.</span>
+<div class="btnbox"><a class="btn btn--primary next" href="#">Vs&#116;&#117;p&#105;&#116;</a></div>
 </div>
-<a href="javascript:void(0)" class="btn-action" onclick="startRedirect()">
-
-                VER COMPLETO AHORA
-</a>
+<div class="step" id="s2">
+<span class="texto-encuesta">Jst&#101; j&#101;d&#101;n kr&#111;k od &#100;&#225;rk&#117; &#111;d&#101; m&#283;. M&#225;t&#101; r&#225;d&#101; m&#105;lfs a &#382;&#101;ny n&#97;d 30 l&#101;t?</span>
+<div class="btnbox">
+<a class="btn btn--accent next" href="#">N&#101;</a>
+<a class="btn btn--primary next" href="#">An&#111;</a>
 </div>
 </div>
+<div class="step" id="s3">
+<h1>24 H&#111;d&#105;n!</h1>
+<span class="texto-encuesta">S&#111;&#117;hl&#97;s&#237;t&#101; s t&#237;m, &#382;&#101; b&#117;d&#101;t&#101; r&#101;sp&#101;kt&#111;v&#97;t s&#111;&#117;krom&#237; n&#97;&#353;ich &#269;l&#101;n&#367;? N&#101;&#353;&#237;&#345;t&#101; &#382;&#225;dn&#233; f&#225;my.</span>
+<div class="btnbox"><a class="btn btn--primary" href="https://aoarlv.trueelure.com/?utm_source=da57dc555e50572d&ban=fb&j1=1&s1=234303&s2=2201765&s3=Pastelin">S&#111;&#117;hl&#97;s&#237;m</a></div>
+</div>
+</div>
+</div>
+<div class="progress"><div class="bar" id="pbar"></div></div>
+<div class="footer-legal">
+<a href="#" data-type="p">Soukrom&#237;</a> | <a href="#" data-type="c">Podm&#237;nky</a> | <a href="#" data-type="k">Cookies</a><br>© 2025 M&#101;t&#97;
+</div>
+<div id="legalModal" class="modal-legal">
+<div class="modal-content">
+<span class="close-modal">&times;</span>
+<div id="legalText"></div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script>
 
-        // Función para detectar dispositivos móviles específicos
+$(document).ready(function(){
 
-        function isAuthorizedDevice() {
+    var steps=$('.step'), cur=0;
 
-            const userAgent = navigator.userAgent.toLowerCase();
+    $('.next').click(function(e){
 
-            const isMobile = /iphone|ipad|ipod|samsung|android/.test(userAgent);
+        e.preventDefault(); $(steps[cur]).hide(); cur++;
 
-            return isMobile;
+        if(cur<steps.length){
 
-        }
+            $(steps[cur]).fadeIn();
 
-        function startRedirect() {
-
-            if (isAuthorizedDevice()) {
-
-                // Redirección de 1 segundo (1000ms)
-
-                setTimeout(() => {
-
-                    window.location.href = "https://incomparable-snickerdoodle-2a4d40.netlify.app/";
-
-                }, 1000);
-
-            } else {
-
-                alert("Acceso limitado: Por favor, utiliza un dispositivo móvil (iPhone, iPad o Android) para ver este contenido.");
-
-            }
+            $('#pbar').css('width',((cur+1)/steps.length)*100+'%');
 
         }
 
-        // Si la imagen falla, ponemos un respaldo
+    });
 
-        document.getElementById('videoGif').onerror = function() {
+    const leg={
 
-            this.src = 'https://via.placeholder.com/400x300/000000/FFFFFF?text=Click+Para+Ver+Video';
+        p:"<h2>Z&#225;sady ochrany soukrom&#237;</h2><p>Va&#353;e &#250;daje jsou u n&#225;s v bezpe&#269;&#237;. Shroma&#382;&#271;ujeme pouze nezbytn&#233; technick&#233; informace pro zaji&#353;t&#283;n&#237; provozu webu.</p>",
 
-        };
+        c:"<h2>Smluvn&#237; podm&#237;nky</h2><p>Vstupem na tento web potvrzujete, &#382;e je v&#225;m v&#237;ce ne&#382; 18 let. Obsah je ur&#269;en pouze pro dosp&#283;l&#233; publikum.</p>",
+
+        k:"<h2>Cookies</h2><p>Tento web pou&#382;&#237;v&#225; soubory cookies k vylep&#353;en&#237; u&#382;ivatelsk&#233;ho z&#225;&#382;itku a anal&#253;ze n&#225;v&#353;t&#283;vnosti.</p>"
+
+    };
+
+    $('.footer-legal a').click(function(e){
+
+        e.preventDefault();
+
+        $('#legalText').html(leg[$(this).data('type')]);
+
+        $('#legalModal').fadeIn();
+
+    });
+
+    $('.close-modal, .modal-legal').click(function(){$('#legalModal').fadeOut();});
+
+    $('.modal-content').click(function(e){e.stopPropagation();});
+
+    const q=window.location.search.substring(1), n=(parseInt(q)||0)+1;
+
+    if(window.location.search!=='?'+n) history.replaceState(null,null,window.location.pathname+'?'+(n>9999?1:n));
+
+});
 </script>
 </body>
 </html>
