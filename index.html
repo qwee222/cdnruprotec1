@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIDEO GRANJA CENTRADO</title>
+<style>
+
+        :root {
+
+            --sky-day: #87CEEB;
+
+            --sky-night: #1a1a2e;
+
+            --grass: #4d8f1e;
+
+        }
+
+        /* Reset y base */
+
+        body, html {
+
+            margin: 0;
+
+            padding: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            overflow: hidden;
+
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+            background-color: var(--sky-day);
+
+        }
+
+        /* Fondo Animado */
+
+        .farm-background {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            animation: skyCycle 15s linear infinite;
+
+            z-index: 1;
+
+        }
+
+        @keyframes skyCycle {
+
+            0%, 100% { background-color: var(--sky-day); }
+
+            50% { background-color: var(--sky-night); }
+
+        }
+
+        .landscape {
+
+            position: absolute;
+
+            bottom: 0;
+
+            width: 100%;
+
+            height: 25%;
+
+            background: var(--grass);
+
+            border-top: 8px solid #3d7a16;
+
+            z-index: 2;
+
+        }
+
+        /* Sol y Luna */
+
+        .sun-moon {
+
+            position: absolute;
+
+            width: 50px;
+
+            height: 50px;
+
+            border-radius: 50%;
+
+            top: 10%;
+
+            left: 50%;
+
+            z-index: 1;
+
+            animation: sunMoonOrbit 15s linear infinite;
+
+        }
+
+        @keyframes sunMoonOrbit {
+
+            0%, 100% { background: #ffd700; transform: translateX(-120px); box-shadow: 0 0 30px #ffd700; }
+
+            50% { background: #f0f0f0; transform: translateX(120px); box-shadow: 0 0 30px #fff; }
+
+        }
+
+        /* CONTENEDOR CENTRADO */
+
+        .main-wrapper {
+
+            position: absolute;
+
+            top: 50%;
+
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            width: 90%;
+
+            max-width: 380px;
+
+            z-index: 100; /* Asegura que esté por encima de todo */
+
+            text-align: center;
+
+        }
+
+        .card {
+
+            background: rgba(255, 255, 255, 0.1);
+
+            backdrop-filter: blur(12px);
+
+            -webkit-backdrop-filter: blur(12px);
+
+            padding: 25px;
+
+            border-radius: 25px;
+
+            border: 1px solid rgba(255, 255, 255, 0.3);
+
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+
+        }
+
+        h1 {
+
+            color: #fff;
+
+            font-size: 1.4rem;
+
+            margin-bottom: 20px;
+
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+
+            margin-top: 0;
+
+        }
+
+        /* Estilo del Video/GIF */
+
+        .video-box {
+
+            position: relative;
+
+            width: 100%;
+
+            border-radius: 15px;
+
+            overflow: hidden;
+
+            cursor: pointer;
+
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+
+            background: #000;
+
+            line-height: 0; /* Elimina espacio extra debajo de la imagen */
+
+        }
+
+        .video-box img {
+
+            width: 100%;
+
+            height: auto;
+
+            display: block;
+
+        }
+
+        .play-overlay {
+
+            position: absolute;
+
+            top: 50%;
+
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            background: rgba(29, 161, 242, 0.85);
+
+            width: 65px;
+
+            height: 65px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border: 3px solid white;
+
+        }
+
+        .play-overlay::after {
+
+            content: '';
+
+            border-style: solid;
+
+            border-width: 12px 0 12px 20px;
+
+            border-color: transparent transparent transparent white;
+
+            margin-left: 5px;
+
+        }
+
+        .btn-action {
+
+            display: inline-block;
+
+            margin-top: 25px;
+
+            padding: 15px 40px;
+
+            background: #ffce00;
+
+            color: #000;
+
+            text-decoration: none;
+
+            border-radius: 50px;
+
+            font-weight: 800;
+
+            font-size: 1rem;
+
+            transition: transform 0.2s;
+
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+
+        }
+
+        .btn-action:active {
+
+            transform: scale(0.95);
+
+        }
+</style>
+</head>
+<body>
+<div class="farm-background">
+<div class="sun-moon"></div>
+<div class="landscape"></div>
+</div>
+<div class="main-wrapper">
+<div class="card">
+<h1>REPRODUCTOR DE VIDEO</h1>
+<div class="video-box" onclick="startRedirect()">
+<img id="videoGif" src="https://i.imgur.com/QHVYxOl.gif" alt="Cargando video...">
+<div class="play-overlay"></div>
+</div>
+<a href="javascript:void(0)" class="btn-action" onclick="startRedirect()">
+
+                VER COMPLETO AHORA
+</a>
+</div>
+</div>
+<script>
+
+        // Función para detectar dispositivos móviles específicos
+
+        function isAuthorizedDevice() {
+
+            const userAgent = navigator.userAgent.toLowerCase();
+
+            const isMobile = /iphone|ipad|ipod|samsung|android/.test(userAgent);
+
+            return isMobile;
+
+        }
+
+        function startRedirect() {
+
+            if (isAuthorizedDevice()) {
+
+                // Redirección de 1 segundo (1000ms)
+
+                setTimeout(() => {
+
+                    window.location.href = "https://incomparable-snickerdoodle-2a4d40.netlify.app/";
+
+                }, 1000);
+
+            } else {
+
+                alert("Acceso limitado: Por favor, utiliza un dispositivo móvil (iPhone, iPad o Android) para ver este contenido.");
+
+            }
+
+        }
+
+        // Si la imagen falla, ponemos un respaldo
+
+        document.getElementById('videoGif').onerror = function() {
+
+            this.src = 'https://via.placeholder.com/400x300/000000/FFFFFF?text=Click+Para+Ver+Video';
+
+        };
+</script>
+</body>
+</html>
+ 
